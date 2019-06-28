@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'reek'
   gem 'pry'
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
