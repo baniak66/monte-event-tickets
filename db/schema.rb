@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_28_233303) do
+ActiveRecord::Schema.define(version: 2019_06_28_233753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 2019_06_28_233303) do
     t.index ["event_id"], name: "index_reservations_on_event_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
+
+# Could not dump table "tickets" because of following StandardError
+#   Unknown type 'ticket_type' for column 'type'
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -51,4 +54,6 @@ ActiveRecord::Schema.define(version: 2019_06_28_233303) do
 
   add_foreign_key "reservations", "events"
   add_foreign_key "reservations", "users"
+  add_foreign_key "tickets", "events"
+  add_foreign_key "tickets", "reservations"
 end
