@@ -22,5 +22,13 @@
 #
 
 class Ticket < ApplicationRecord
+  TICKET_TYPES = {
+    even:         'even',
+    all_together: 'all_together',
+    avoid_one:    'avoid_one'
+  }.freeze
+
   belongs_to :event
+  validates :price, :ticket_type, presence: true
+  validates :ticket_type, inclusion: { in: TICKET_TYPES.values }
 end

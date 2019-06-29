@@ -13,4 +13,5 @@
 
 class Event < ApplicationRecord
   has_many :tickets
+  validates :name, :date, presence: true
 end

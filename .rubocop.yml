@@ -22,3 +22,6 @@ Style/BlockComments:
 
 Style/Documentation:
   Enabled: false
+
+Layout/AlignHash: # don't know why works backward? Check later.
+  Enabled: false
