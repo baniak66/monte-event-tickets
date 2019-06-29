@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  resources :events, only: [:show]
+  namespace :events do
+    resources :show, only: [:show]
+  end
 end

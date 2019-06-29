@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe EventsController, type: :controller do
+RSpec.describe 'Show event tickets', type: :request do
   context 'successful request' do
     let(:event) { create :event }
     let(:serializer) { instance_double('::Serializers::EventTickets') }
@@ -12,7 +12,7 @@ RSpec.describe EventsController, type: :controller do
       allow(::Serializers::EventTickets).to receive(:new).and_return(serializer)
       expect(serializer).to receive(:serialize).and_return(seriailzed_event)
 
-      get :show, params: { id: event.id }
+      get events_show_path(event.id)
       expect(response).to have_http_status :ok
     end
 
@@ -21,7 +21,7 @@ RSpec.describe EventsController, type: :controller do
       expect(::Serializers::EventTickets).to receive(:new).with(event, []).and_return(serializer)
       expect(serializer).to receive(:serialize).and_return(seriailzed_event)
 
-      get :show, params: { id: event.id }
+      get events_show_path(event.id)
       expect(Oj.load(response.body)).to eq seriailzed_event
     end
 
@@ -31,7 +31,7 @@ RSpec.describe EventsController, type: :controller do
         create_list(:ticket, 2, event: event, ticket_type: 'even', price: 200)
         create_list(:ticket, 3, event: event, ticket_type: 'all_together', price: 300)
 
-        get :show, params: { id: event.id }
+        get events_show_path(event.id)
         expect(Oj.load(response.body)).to eq(
           'id'      => event.id,
           'name'    => event.name,
@@ -64,7 +64,7 @@ RSpec.describe EventsController, type: :controller do
   context 'unsuccessful request' do
     context 'fake event id in params' do
       it 'responds with 422' do
-        get :show, params: { id: 'fake_id' }
+        get events_show_path('fake_id')
         expect(response).to have_http_status :unprocessable_entity
       end
     end
