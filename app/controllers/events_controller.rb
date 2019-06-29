@@ -2,7 +2,11 @@
 
 class EventsController < ApplicationController
   def show
-    render json: Oj.dump(serialized_event, mode: :rails)
+    if event
+      render json: Oj.dump(serialized_event, mode: :rails)
+    else
+      head :unprocessable_entity
+    end
   end
 
   private
@@ -16,6 +20,6 @@ class EventsController < ApplicationController
   end
 
   def event
-    @event ||= Event.find(params[:id])
+    @event ||= Event.find_by(id: params[:id])
   end
 end
