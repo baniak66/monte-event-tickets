@@ -82,6 +82,39 @@ ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
 
 
 --
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payments (
+    id bigint NOT NULL,
+    reservation_id bigint NOT NULL,
+    amount integer NOT NULL,
+    currency character varying DEFAULT 'EUR'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.payments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.payments_id_seq OWNED BY public.payments.id;
+
+
+--
 -- Name: reservations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -204,6 +237,13 @@ ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.event
 
 
 --
+-- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments ALTER COLUMN id SET DEFAULT nextval('public.payments_id_seq'::regclass);
+
+
+--
 -- Name: reservations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -241,6 +281,14 @@ ALTER TABLE ONLY public.events
 
 
 --
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: reservations reservations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -270,6 +318,13 @@ ALTER TABLE ONLY public.tickets
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_payments_on_reservation_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payments_on_reservation_id ON public.payments USING btree (reservation_id);
 
 
 --
@@ -322,6 +377,14 @@ CREATE UNIQUE INDEX index_users_on_uid_and_provider ON public.users USING btree 
 
 
 --
+-- Name: payments fk_rails_1aad13b52c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT fk_rails_1aad13b52c FOREIGN KEY (reservation_id) REFERENCES public.reservations(id);
+
+
+--
 -- Name: reservations fk_rails_48a92fce51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -363,6 +426,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190628132643'),
 ('20190628225427'),
 ('20190628233303'),
-('20190628233753');
+('20190628233753'),
+('20190629001838');
 
 

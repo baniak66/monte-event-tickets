@@ -52,6 +52,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  config.active_record.schema_format = :sql
 end
