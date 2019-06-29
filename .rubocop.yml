@@ -6,7 +6,7 @@ AllCops:
     - 'vendor/bundle/**/*' # for cicleci
 
 Metrics/LineLength:
-  Max: 100
+  Max: 110
 
 Metrics/BlockLength:
   Enabled: false

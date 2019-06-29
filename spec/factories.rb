@@ -13,4 +13,14 @@ FactoryBot.define do
     ticket_type { 'avoid_one' }
     price       { 100 }
   end
+
+  factory :reservation do
+    event
+    user
+  end
+
+  factory :user do
+    email    { 'test@email.net' }
+    password { 'password' }
+  end
 end
