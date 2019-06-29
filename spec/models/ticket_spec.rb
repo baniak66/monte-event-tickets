@@ -6,7 +6,7 @@
 #
 #  id             :bigint           not null, primary key
 #  price          :integer          not null
-#  type           :enum             not null
+#  ticket_type    :enum             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  event_id       :bigint           not null
@@ -14,8 +14,7 @@
 #
 # Indexes
 #
-#  index_tickets_on_event_id        (event_id)
-#  index_tickets_on_reservation_id  (reservation_id)
+#  index_tickets_on_event_id  (event_id)
 #
 # Foreign Keys
 #

@@ -6,9 +6,9 @@ class CreateTickets < ActiveRecord::Migration[5.2]
 
     create_table :tickets do |t|
       t.references :event, foreign_key: true, null: false
-      t.references :reservation
+      t.references :reservation, index: false
       t.integer :price, null: false
-      t.column :type, "ticket_type", null: false
+      t.column :ticket_type, "ticket_type", null: false
 
       t.timestamps
     end

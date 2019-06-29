@@ -164,7 +164,7 @@ CREATE TABLE public.tickets (
     event_id bigint NOT NULL,
     reservation_id bigint,
     price integer NOT NULL,
-    type public.ticket_type NOT NULL,
+    ticket_type public.ticket_type NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -346,13 +346,6 @@ CREATE INDEX index_reservations_on_user_id ON public.reservations USING btree (u
 --
 
 CREATE INDEX index_tickets_on_event_id ON public.tickets USING btree (event_id);
-
-
---
--- Name: index_tickets_on_reservation_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_tickets_on_reservation_id ON public.tickets USING btree (reservation_id);
 
 
 --
