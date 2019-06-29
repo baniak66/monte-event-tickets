@@ -162,7 +162,7 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.tickets (
     id bigint NOT NULL,
     event_id bigint NOT NULL,
-    reservation_id bigint NOT NULL,
+    reservation_id bigint,
     price integer NOT NULL,
     type public.ticket_type NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -398,14 +398,6 @@ ALTER TABLE ONLY public.reservations
 
 ALTER TABLE ONLY public.tickets
     ADD CONSTRAINT fk_rails_4def87ea62 FOREIGN KEY (event_id) REFERENCES public.events(id);
-
-
---
--- Name: tickets fk_rails_65422fe751; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.tickets
-    ADD CONSTRAINT fk_rails_65422fe751 FOREIGN KEY (reservation_id) REFERENCES public.reservations(id);
 
 
 --

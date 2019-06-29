@@ -10,7 +10,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  event_id       :bigint           not null
-#  reservation_id :bigint           not null
+#  reservation_id :bigint
 #
 # Indexes
 #
@@ -20,7 +20,6 @@
 # Foreign Keys
 #
 #  fk_rails_...  (event_id => events.id)
-#  fk_rails_...  (reservation_id => reservations.id)
 #
 
 class Ticket < ApplicationRecord
