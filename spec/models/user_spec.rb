@@ -25,12 +25,10 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #
 
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  include DeviseTokenAuth::Concerns::User
+require 'rails_helper'
 
-  has_many :reservations
+RSpec.describe User, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_many(:reservations) }
+  end
 end
