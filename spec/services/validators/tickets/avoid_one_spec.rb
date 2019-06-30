@@ -26,7 +26,7 @@ RSpec.describe Validators::Tickets::AvoidOne do
       end
     end
 
-    context 'user want to order only a part of all_together tickets' do
+    context 'user want to order only 1 of 2 left avoid_one tickets' do
       let(:reserved)  { 1 }
       let(:available) { 2 }
 
