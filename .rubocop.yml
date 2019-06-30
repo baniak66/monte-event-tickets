@@ -25,3 +25,6 @@ Style/Documentation:
 
 Layout/AlignHash: # don't know why works backward? Check later.
   Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
