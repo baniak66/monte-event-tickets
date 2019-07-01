@@ -111,7 +111,7 @@ RSpec.describe 'Create reservation', type: :request do
   end
 
   context 'not logged user' do
-    it 'responds with 200' do
+    it 'responds with 401' do
       post reservations_create_path, params: {}
       expect(response).to have_http_status 401
     end
