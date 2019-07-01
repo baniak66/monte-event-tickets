@@ -21,7 +21,7 @@ RSpec.describe Serializers::Reservation do
   describe '.serialize' do
     it 'returns serialized reservation with tickets' do
       expect(instance.serialize).to eq(
-        event_date:     1562061600,
+        event_date:     1562068800,
         event_name:     "Awesome Event",
         reservation_id: 1,
         tickets:        [
