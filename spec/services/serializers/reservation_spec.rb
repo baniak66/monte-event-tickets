@@ -8,12 +8,12 @@ RSpec.describe Serializers::Reservation do
       "reservation_id"   => 1,
       "event_name"       => "Awesome Event",
       "event_date"       => "2019-07-02 12:00:00",
+      "tickets_amount"   => 1800,
       "tickets_quantity" => [
         { "quantity" => 2, "type" => "even" },
         { "quantity" => 3, "type" => "all_together" },
         { "quantity" => 5, "type" => "avoid_one" }
-      ].to_json,
-      "tickets_amount"   => 1800
+      ].to_json
     }
   end
   let(:instance) { described_class.new(reservation_data) }
@@ -34,6 +34,3 @@ RSpec.describe Serializers::Reservation do
     end
   end
 end
-
-
-

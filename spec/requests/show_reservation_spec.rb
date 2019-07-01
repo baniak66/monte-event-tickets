@@ -40,8 +40,8 @@ RSpec.describe 'Show reservation', type: :request do
         "event_date"     => event.date.to_i,
         "event_name"     => event.name,
         "reservation_id" => reservation.id,
-        "tickets"        => [{"quantity"=>1, "type"=>"avoid_one"}],
-        "tickets_amount" => 100,
+        "tickets"        => [{ "quantity" => 1, "type" => "avoid_one" }],
+        "tickets_amount" => 100
       )
     end
   end

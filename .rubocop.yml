@@ -23,6 +23,9 @@ Style/BlockComments:
 Style/Documentation:
   Enabled: false
 
+Style/NumericLiterals:
+  Enabled: false
+
 Layout/AlignHash: # don't know why works backward? Check later.
   Enabled: false
 
