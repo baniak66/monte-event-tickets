@@ -11,7 +11,11 @@ module Reservations
     private
 
     def serialized_reservation
-      {}
+      ::Serializers::Reservation.new(reservation_data).serialize
+    end
+
+    def reservation_data
+      ::Repository::ReservationTickets.call(params[:id])
     end
   end
 end

@@ -20,7 +20,7 @@ module Serializers
 
     def event_date
       {
-        event_date: Time.parse(reservation_data.fetch(:event_date)).to_i
+        event_date: Time.zone.parse(reservation_data.fetch(:event_date)).to_i
       }
     end
 
