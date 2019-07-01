@@ -4,8 +4,8 @@ module Validators
   module Tickets
     class Base
       def initialize(reserved, available)
-        @reserved  = reserved
-        @available = available
+        @reserved  = reserved.to_i
+        @available = available.to_i
       end
 
       def validate
