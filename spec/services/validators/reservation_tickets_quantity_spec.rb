@@ -117,5 +117,28 @@ RSpec.describe Validators::ReservationTicketsQuantity do
         )
       end
     end
+
+    context 'reservation types not mach available types' do
+      let(:tickets_quantity) do
+        {
+          even:         1,
+          all_together: 3,
+        }
+      end
+      let(:availiavle_tickets) do
+        {
+          "even" => [{ "quantity" => 2 }],
+        }
+      end
+
+      it 'returns all validators errors array' do
+        expect(instance.validate).to match_array(
+          [
+            "We haven't got enough 'all_together' tickets available",
+            "You have to reserve even number of tickets"
+          ]
+        )
+      end
+    end
   end
 end

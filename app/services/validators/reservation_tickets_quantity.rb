@@ -2,13 +2,18 @@
 
 module Validators
   class ReservationTicketsQuantity
+    NO_TICKETS_HASH = [{ 'quantity' => 0 }]
+
     def initialize(tickets_quantity, available_tickets)
       @tickets_quantity  = tickets_quantity
       @available_tickets = available_tickets
     end
 
     def validate
-      tickets_quantity.map { |type, reserved| validate_type(type, reserved) }.flatten
+      tickets_quantity.map do |type, reserved|
+        next unless reserved
+        validate_type(type, reserved)
+      end.flatten.compact
     end
 
     private
@@ -33,7 +38,7 @@ module Validators
     end
 
     def available_in_type(ticket_type)
-      available_tickets.fetch(ticket_type.to_s).first['quantity']
+      available_tickets.fetch(ticket_type.to_s, NO_TICKETS_HASH).first['quantity']
     end
   end
 end
