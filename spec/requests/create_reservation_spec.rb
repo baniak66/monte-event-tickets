@@ -37,11 +37,11 @@ RSpec.describe 'Create reservation', type: :request do
           .with(
             user:             user,
             event_id:         event.id.to_s,
-            tickets_quantity: [
+            tickets_quantity: {
               even:         '2',
               all_together: '3',
               avoid_one:    '1'
-            ]
+            }
           )
           .and_return(create_action)
         expect(create_action).to receive(:call).and_return(action_response)
@@ -62,6 +62,48 @@ RSpec.describe 'Create reservation', type: :request do
       it 'renders json with errors' do
         post reservations_create_path, params: {}, headers: user_auth_headers
         expect(Oj.load(response.body)).to eq('errors' => 'realy_bad_error')
+      end
+    end
+  end
+
+  context 'integration test' do
+    include_context 'user_token_authentication'
+
+    before { create_list :ticket, 2, event: event, ticket_type: 'even' }
+
+    context 'reservation valid' do
+      let(:request_params) do
+        {
+          event_id:     event.id,
+          even:         2,
+        }
+      end
+
+      it 'responds with success' do
+        post reservations_create_path, params: request_params, headers: user_auth_headers
+        expect(response).to have_http_status :ok
+      end
+    end
+
+    context 'reservation invalid' do
+      let(:request_params) do
+        {
+          event_id:     event.id,
+          even:         1,
+          all_together: 2
+        }
+      end
+
+      it 'responds with 422 status' do
+        post reservations_create_path, params: request_params, headers: user_auth_headers
+        expect(response).to have_http_status 422
+      end
+
+      it 'responds with error json' do
+        post reservations_create_path, params: request_params, headers: user_auth_headers
+        expect(Oj.load(response.body)).to eq(
+          "errors" => "You have to reserve even number of tickets. We haven't got enough 'all_together' tickets available"
+        )
       end
     end
   end

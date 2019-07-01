@@ -23,11 +23,11 @@ module Reservations
       {
         user:             current_user,
         event_id:         params[:event_id],
-        tickets_quantity: [
+        tickets_quantity: {
           even:         params[:even],
           all_together: params[:all_together],
           avoid_one:    params[:avoid_one]
-        ]
+        }
       }
     end
   end
