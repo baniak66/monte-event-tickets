@@ -6,7 +6,7 @@ module Repository
       def call(reservation_id)
         ActiveRecord::Base.connection.execute(
           ActiveRecord::Base.sanitize_sql_array([query_string, reservation_id: reservation_id])
-        ).to_a
+        ).to_a.first
       end
 
       private

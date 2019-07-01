@@ -15,15 +15,13 @@ RSpec.describe Repository::ReservationTickets do
       ].to_json
     end
     let(:result) do
-      [
-        {
-          "reservation_id"   => reservation.id,
-          "event_name"       => event.name,
-          "event_date"       => event.date.strftime("%Y-%m-%d %H:%M:%S"),
-          "tickets_quantity" => result_quantity_array,
-          "tickets_amount"   => 1800 # (5 * 100) + (2 * 200) + (3 * 300)
-        }
-      ]
+      {
+        "reservation_id"   => reservation.id,
+        "event_name"       => event.name,
+        "event_date"       => event.date.strftime("%Y-%m-%d %H:%M:%S"),
+        "tickets_quantity" => result_quantity_array,
+        "tickets_amount"   => 1800 # (5 * 100) + (2 * 200) + (3 * 300)
+      }
     end
 
     before do
