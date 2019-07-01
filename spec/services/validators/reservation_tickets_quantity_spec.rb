@@ -122,12 +122,12 @@ RSpec.describe Validators::ReservationTicketsQuantity do
       let(:tickets_quantity) do
         {
           even:         1,
-          all_together: 3,
+          all_together: 3
         }
       end
       let(:availiavle_tickets) do
         {
-          "even" => [{ "quantity" => 2 }],
+          "even" => [{ "quantity" => 2 }]
         }
       end
 

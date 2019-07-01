@@ -74,8 +74,8 @@ RSpec.describe 'Create reservation', type: :request do
     context 'reservation valid' do
       let(:request_params) do
         {
-          event_id:     event.id,
-          even:         2,
+          event_id: event.id,
+          even:     2
         }
       end
 
@@ -100,9 +100,11 @@ RSpec.describe 'Create reservation', type: :request do
       end
 
       it 'responds with error json' do
+        even_error         = "You have to reserve even number of tickets"
+        all_together_error = "We haven't got enough 'all_together' tickets available"
         post reservations_create_path, params: request_params, headers: user_auth_headers
         expect(Oj.load(response.body)).to eq(
-          "errors" => "You have to reserve even number of tickets. We haven't got enough 'all_together' tickets available"
+          "errors" => [even_error, all_together_error].join('. ')
         )
       end
     end

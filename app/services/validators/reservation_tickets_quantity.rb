@@ -2,7 +2,7 @@
 
 module Validators
   class ReservationTicketsQuantity
-    NO_TICKETS_HASH = [{ 'quantity' => 0 }]
+    NO_TICKETS_HASH = [{ 'quantity' => 0 }].freeze
 
     def initialize(tickets_quantity, available_tickets)
       @tickets_quantity  = tickets_quantity
