@@ -23,4 +23,10 @@ FactoryBot.define do
     email    { 'test@email.net' }
     password { 'password' }
   end
+
+  factory :payment do
+    reservation
+    amount   { 100 }
+    currency { 'EUR' }
+  end
 end

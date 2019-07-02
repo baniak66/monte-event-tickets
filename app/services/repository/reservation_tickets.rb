@@ -18,7 +18,8 @@ module Repository
             e.name AS event_name,
             e.date AS event_date,
             tickets_reserved.quantity AS tickets_quantity,
-            reserved_tickets_amount.summed AS tickets_amount
+            reserved_tickets_amount.summed AS tickets_amount,
+            paid.amount as paid_amount
           FROM reservations r
           JOIN events e ON e.id = r.event_id
           LEFT JOIN LATERAL
@@ -36,7 +37,12 @@ module Repository
               SELECT SUM(t.price) AS summed
               FROM tickets t
               WHERE t.reservation_id = :reservation_id
-              ) AS reserved_tickets_amount on true
+            ) AS reserved_tickets_amount ON true
+          LEFT JOIN LATERAL
+            (
+              SELECT COALESCE(
+                (SELECT amount FROM payments p WHERE p.reservation_id = :reservation_id), 0) AS amount
+            ) AS paid ON true
           WHERE r.id = :reservation_id
         SQL
       end

@@ -20,9 +20,11 @@ RSpec.describe Repository::ReservationTickets do
         "event_name"       => event.name,
         "event_date"       => event.date.strftime("%Y-%m-%d %H:%M:%S"),
         "tickets_quantity" => result_quantity_array,
-        "tickets_amount"   => 1800 # (5 * 100) + (2 * 200) + (3 * 300)
+        "tickets_amount"   => 1800, # (5 * 100) + (2 * 200) + (3 * 300)
+        "paid_amount"      => paid_amount
       }
     end
+    let(:paid_amount) { 0 }
 
     before do
       create_list(:ticket, 5, event: event, ticket_type: 'avoid_one',
@@ -54,6 +56,18 @@ RSpec.describe Repository::ReservationTickets do
           price: 200, reservation_id: reservation_2.id)
         create_list(:ticket, 3, event: event, ticket_type: 'all_together',
           price: 300, reservation_id: reservation_2.id)
+      end
+
+      it 'returns proper reservation data' do
+        expect(described_class.call(reservation.id)).to eq(result)
+      end
+    end
+
+    context 'with payment' do
+      let(:paid_amount) { 1800 }
+
+      before do
+        create :payment, reservation: reservation, amount: paid_amount
       end
 
       it 'returns proper reservation data' do
