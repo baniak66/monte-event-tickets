@@ -36,17 +36,17 @@ RSpec.describe 'Create reservation', type: :request do
           .to receive(:new)
           .with(
             user:             user,
-            event_id:         event.id.to_s,
+            event_id:         event.id,
             tickets_quantity: {
-              even:         '2',
-              all_together: '3',
-              avoid_one:    '1'
+              even:         2,
+              all_together: 3,
+              avoid_one:    1
             }
           )
           .and_return(create_action)
         expect(create_action).to receive(:call).and_return(action_response)
 
-        post reservations_create_path, params: request_params, headers: user_auth_headers
+        post reservations_create_path, params: request_params, headers: user_auth_headers, as: :json
       end
     end
 
