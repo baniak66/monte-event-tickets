@@ -206,7 +206,8 @@ CREATE TABLE public.users (
     remember_created_at timestamp without time zone,
     tokens json,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    payment_token character varying DEFAULT ''::character varying
 );
 
 
@@ -412,6 +413,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190628225427'),
 ('20190628233303'),
 ('20190628233753'),
-('20190629001838');
+('20190629001838'),
+('20190702212215');
 
 
