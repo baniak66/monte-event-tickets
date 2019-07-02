@@ -9,6 +9,7 @@ RSpec.describe Serializers::Reservation do
       "event_name"       => "Awesome Event",
       "event_date"       => "2019-07-02 12:00:00",
       "tickets_amount"   => 1800,
+      "paid_amount"      => 1800,
       "tickets_quantity" => [
         { "quantity" => 2, "type" => "even" },
         { "quantity" => 3, "type" => "all_together" },
@@ -29,7 +30,8 @@ RSpec.describe Serializers::Reservation do
           { "quantity" => 3, "type" => "all_together" },
           { "quantity" => 5, "type" => "avoid_one" }
         ],
-        tickets_amount: 1800
+        tickets_amount: 1800,
+        paid_amount:    1800
       )
     end
   end

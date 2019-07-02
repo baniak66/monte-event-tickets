@@ -10,23 +10,18 @@ module Serializers
       reservation_data
         .symbolize_keys!
         .slice(:reservation_id, :event_name, :tickets_amount)
-        .merge(event_date)
-        .merge(reservation_tickets)
+        .merge(reservation_details)
     end
 
     private
 
     attr_reader :reservation_data
 
-    def event_date
+    def reservation_details
       {
-        event_date: Time.zone.parse(reservation_data.fetch(:event_date)).to_i
-      }
-    end
-
-    def reservation_tickets
-      {
-        tickets: Oj.load(reservation_data.fetch(:tickets_quantity))
+        event_date:  Time.zone.parse(reservation_data.fetch(:event_date)).to_i,
+        tickets:     Oj.load(reservation_data.fetch(:tickets_quantity)),
+        paid_amount: reservation_data.fetch(:paid_amount)
       }
     end
   end
