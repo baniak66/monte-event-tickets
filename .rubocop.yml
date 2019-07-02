@@ -31,3 +31,6 @@ Layout/AlignHash: # don't know why works backward? Check later.
 
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
