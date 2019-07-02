@@ -1,21 +1,10 @@
 # frozen_string_literal: true
 
 module Payments
-  class CreateController < ApplicationController
-    before_action :authenticate_user!
-
-    def create
-      action_response = create_payment.call
-      if action_response.success?
-        head :ok
-      else
-        render json: Oj.dump(action_response.result, mode: :rails), status: :unprocessable_entity
-      end
-    end
-
+  class CreateController < BaseActionController
     private
 
-    def create_payment
+    def action
       ::Actions::CreatePayment.new(
         reservation_id: params[:id],
         amount:         params[:amount],
