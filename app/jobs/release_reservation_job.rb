@@ -3,6 +3,7 @@
 class ReleaseReservationJob < ApplicationJob
   queue_as :default
 
+  # :reek:UtilityFunction
   def perform(reservation_id)
     payment = Payment.find_by(reservation_id: reservation_id)
     return if payment

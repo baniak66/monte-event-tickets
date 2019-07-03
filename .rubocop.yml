@@ -34,3 +34,11 @@ Layout/EmptyLineAfterGuardClause:
 
 Naming/RescuedExceptionsVariableName:
   Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+Layout/SpaceBeforeBlockBraces:
+    Exclude:
+    - "spec/**/*"

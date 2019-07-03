@@ -43,5 +43,3 @@ RSpec.describe ReleaseReservationJob do
     end
   end
 end
-
-
