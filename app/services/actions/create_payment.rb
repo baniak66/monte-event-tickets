@@ -40,7 +40,7 @@ module Actions
     end
 
     def successful_callback
-      Reservation.where(id: reservation_id).update(state: Reservation::STATE.fetch(:paid))
+      Reservation.where(id: reservation_id).update(state: Reservation::STATES.fetch(:paid))
       Actions::Response::Success.new
     end
   end

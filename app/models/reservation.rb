@@ -24,7 +24,7 @@
 
 class Reservation < ApplicationRecord
   NOT_PAID_RELEASE_TIME = 15
-  STATE = {
+  STATES = {
     initialized: 'initialized',
     paid:        'paid',
     canceled:    'canceled'
@@ -34,4 +34,8 @@ class Reservation < ApplicationRecord
   belongs_to :user
   has_many :tickets
   has_one :payment
+
+  def paid?
+    state == STATES.fetch(:paid)
+  end
 end
