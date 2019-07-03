@@ -46,6 +46,16 @@ RSpec.describe Actions::CreateReservation do
       it 'returns success response object' do
         expect(instance.call).to be_instance_of(Actions::Response::Success)
       end
+
+      it 'triggers release reservation job' do
+        release_reservation_job = class_double('ReleaseReservationJob')
+        expect(ReleaseReservationJob).to receive(:set)
+          .with(wait: 15.minutes).and_return(release_reservation_job)
+        expect(release_reservation_job).to receive(:perform_later)
+          .with(kind_of(Integer))
+
+        instance.call
+      end
     end
 
     context 'action failed' do

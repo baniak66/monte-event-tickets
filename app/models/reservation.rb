@@ -22,6 +22,8 @@
 #
 
 class Reservation < ApplicationRecord
+  NOT_PAID_RELEASE_TIME = 15
+
   belongs_to :event
   belongs_to :user
   has_many :tickets

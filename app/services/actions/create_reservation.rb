@@ -10,7 +10,7 @@ module Actions
 
     def call
       return validation_error_response unless validation_errors.empty?
-      return Actions::Response::Success.new if create_reservation
+      return success_callback if create_reservation
       Actions::Response::Error.new(result: { errors: 'Error occured' })
     end
 
@@ -60,6 +60,13 @@ module Actions
     def available_tickets
       tickets = ::Repository::EventAvailableTickets.call(event_id)
       tickets.group_by { |ticket_hash| ticket_hash['type'] }
+    end
+
+    def success_callback
+      ReleaseReservationJob
+        .set(wait: Reservation::NOT_PAID_RELEASE_TIME.minutes)
+        .perform_later(reservation.id)
+      Actions::Response::Success.new
     end
   end
 end
