@@ -29,6 +29,7 @@ RSpec.describe Actions::CreateReservation do
 
         expect(user.reservations.count).to eq 1
         expect(reservation.event_id).to eq event.id
+        expect(reservation.state).to eq 'initialized'
         expect(reservation.tickets.count).to eq 1
       end
 

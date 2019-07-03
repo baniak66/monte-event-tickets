@@ -34,6 +34,10 @@ RSpec.describe Actions::CreatePayment do
       it 'returns success response object' do
         expect(instance.call).to be_instance_of(Actions::Response::Success)
       end
+
+      it 'updates reservation status to paid' do
+        expect{ instance.call }.to change{ reservation.reload.state }.from('initialized').to('paid')
+      end
     end
 
     context 'operation raises error' do

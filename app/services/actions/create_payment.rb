@@ -27,7 +27,7 @@ module Actions
         amount:         charge_result.amount,
         currency:       charge_result.currency
       )
-      payment.persisted? ? Actions::Response::Success.new : error_response("Error occured")
+      payment.persisted? ? successful_callback : error_response("Error occured")
     end
 
     def charge_result
@@ -37,6 +37,11 @@ module Actions
     # :reek:UtilityFunction
     def error_response(error)
       Actions::Response::Error.new(result: { errors: error })
+    end
+
+    def successful_callback
+      Reservation.where(id: reservation_id).update(state: Reservation::STATE.fetch(:paid))
+      Actions::Response::Success.new
     end
   end
 end

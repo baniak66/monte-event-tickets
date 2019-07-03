@@ -24,6 +24,11 @@
 
 class Reservation < ApplicationRecord
   NOT_PAID_RELEASE_TIME = 15
+  STATE = {
+    initialized: 'initialized',
+    paid:        'paid',
+    canceled:    'canceled'
+  }.freeze
 
   belongs_to :event
   belongs_to :user
