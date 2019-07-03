@@ -23,6 +23,17 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
+-- Name: reservation_state; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.reservation_state AS ENUM (
+    'initialized',
+    'paid',
+    'canceled'
+);
+
+
+--
 -- Name: ticket_type; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -123,7 +134,8 @@ CREATE TABLE public.reservations (
     event_id bigint NOT NULL,
     user_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    state public.reservation_state DEFAULT 'initialized'::public.reservation_state
 );
 
 
@@ -414,6 +426,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190628233303'),
 ('20190628233753'),
 ('20190629001838'),
-('20190702212215');
+('20190702212215'),
+('20190703102517');
 
 
