@@ -21,7 +21,8 @@ RSpec.describe Repository::ReservationTickets do
         "event_date"       => event.date.strftime("%Y-%m-%d %H:%M:%S"),
         "tickets_quantity" => result_quantity_array,
         "tickets_amount"   => 1800, # (5 * 100) + (2 * 200) + (3 * 300)
-        "paid_amount"      => paid_amount
+        "paid_amount"      => paid_amount,
+        "state"            => reservation.state
       }
     end
     let(:paid_amount) { 0 }

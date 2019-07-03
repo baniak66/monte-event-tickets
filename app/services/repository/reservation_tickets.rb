@@ -19,7 +19,8 @@ module Repository
             e.date AS event_date,
             tickets_reserved.quantity AS tickets_quantity,
             reserved_tickets_amount.summed AS tickets_amount,
-            paid.amount as paid_amount
+            paid.amount AS paid_amount,
+            r.state
           FROM reservations r
           JOIN events e ON e.id = r.event_id
           LEFT JOIN LATERAL

@@ -42,7 +42,8 @@ RSpec.describe 'Show reservation', type: :request do
         "reservation_id" => reservation.id,
         "tickets"        => [{ "quantity" => 1, "type" => "avoid_one" }],
         "tickets_amount" => 100,
-        "paid_amount"    => 0
+        "paid_amount"    => 0,
+        "state"          => 'initialized'
       )
     end
   end

@@ -9,7 +9,7 @@ module Serializers
     def serialize
       reservation_data
         .symbolize_keys!
-        .slice(:reservation_id, :event_name, :tickets_amount)
+        .slice(:reservation_id, :event_name, :tickets_amount, :state)
         .merge(reservation_details)
     end
 
