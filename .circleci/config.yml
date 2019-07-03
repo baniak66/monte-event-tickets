@@ -13,6 +13,7 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: smonte-event-tickets_test
+      - image: redis
     steps:
       - checkout
 
